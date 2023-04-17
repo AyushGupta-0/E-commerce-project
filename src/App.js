@@ -1,17 +1,18 @@
-import Header from './components/Header/Header';
-import Productslist from './components/Product/ProductList';
+import Header from "./components/Header/Header";
+import Productslist from "./components/Products/ProductsList";
+import CartState from "./store/CartState";
 
-import './App.css';
-import Product from './components/Product/Product';
+import "./App.css";
 
 const App = () => {
-  
   return (
     <>
-    <Header/>
-    <Productslist/>
-      </>
+      <CartState>
+        <Header />
+        <Productslist />
+      </CartState>
+    </>
   );
-}
+};
 
 export default App;

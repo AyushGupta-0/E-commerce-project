@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 const Header = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" expand="lg" variant="dark">
       <Container>
         <Navbar.Brand href="#home">E-Comm Store</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -17,7 +17,7 @@ const Header = () => {
             <Nav.Link href="#link">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Cart />
+        <Cart/>
       </Container>
     </Navbar>
   );

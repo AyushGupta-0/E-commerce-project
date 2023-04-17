@@ -1,44 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import CartItem from "./CartItem";
 import Table from "react-bootstrap/Table";
+import ProductContext from "../../store/product-context";
 
 export default function Cart() {
-  const cartElements = [
-    {
-      title: "Colors",
+  const cartState = useContext(ProductContext);
+  let quantity = 0;
+  cartState.items.forEach((item) => {
+    quantity = quantity + Number(item.quantity);
+  });
 
-      price: 100,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-
-      quantity: 2,
-    },
-
-    {
-      title: "Black and white Colors",
-
-      price: 50,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-
-      quantity: 3,
-    },
-
-    {
-      title: "Yellow and Black Colors",
-
-      price: 70,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-
-      quantity: 1,
-    },
-  ];
   const listItem = (
     <Table striped bordered hover>
       <thead>
@@ -50,12 +23,13 @@ export default function Cart() {
         </tr>
       </thead>
       <tbody>
-        {cartElements.map((item) => (
+        {cartState.items.map((item) => (
           <CartItem
-            name={item.title}
+            key={item.title}
+            title={item.title}
             price={item.price}
+            img={item.img}
             quantity={item.quantity}
-            img={item.imageUrl}
           />
         ))}
       </tbody>
@@ -66,26 +40,29 @@ export default function Cart() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  let totalprice = 0;
+  cartState.items.forEach((item) => {
+    totalprice += item.quantity * item.price;
+  });
 
   return (
-    <div>
-      <>
-        <Button variant="primary" onClick={handleShow}>
-          Cart <i class="fa fa-shopping-cart"></i>
-        </Button>
+    <>
+      <Button variant="warning" onClick={handleShow}>
+        Cart {quantity} <i className="fa fa-shopping-cart"></i>
+      </Button>
 
-        <Offcanvas show={show} onHide={handleClose}>
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>
-              My Cart <i class="fa fa-shopping-cart"></i>
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            {listItem}
-            <h3>Total Price 420$</h3>
-          </Offcanvas.Body>
-        </Offcanvas>
-      </>
-    </div>
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            My Cart <i class="fa fa-shopping-cart"></i>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {listItem}
+          <hr />
+          <h5>Total Price ${totalprice}</h5>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
   );
 }
