@@ -19,6 +19,11 @@ export default function MainHeader() {
                   Home
                 </Button>
               </Link>
+              <Link to="/store">
+                <Button variant="outline-light" size="sm" className="mx-2">
+                  Store
+                </Button>
+              </Link>
               <Link to="/about">
                 <Button variant="outline-light" size="sm" className="mx-2">
                   About
