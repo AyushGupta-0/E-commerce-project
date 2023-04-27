@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Home.css";
+import "./Home.css";
 
 import MainHeader from "../components/Header/MainHeader";
 
