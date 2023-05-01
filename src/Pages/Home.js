@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 
+
 import MainHeader from "../components/Header/MainHeader";
 
 import CartState from "../store/CartState";
@@ -9,7 +10,7 @@ import CartState from "../store/CartState";
 
 export default function Home() {
   return (
-    <>
+    <React.Fragment>
       <CartState>
         <MainHeader />
       </CartState>
@@ -76,6 +77,6 @@ export default function Home() {
             </ul> */}
         </div>
       </footer>
-    </>
+    </React.Fragment>
   );
 }
