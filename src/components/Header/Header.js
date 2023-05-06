@@ -1,29 +1,34 @@
-import React from 'react'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Cart from './Cart';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Cart from "./Cart";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import AuthContext from "../../store/auth-context";
 export default function Header() {
-  return (<>
-   
-    <Navbar bg="dark" expand="lg" variant='dark'>
-      <Container>
-        <Navbar.Brand href="#home">E-Comm Store</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
+  const authctx = useContext(AuthContext);
+  const login = authctx.isLoggenIn;
+  return (
+    <>
+      <Navbar bg="dark" expand="lg" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">E-Comm Store</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
               <Link to="/">
                 <Button variant="outline-light" size="sm" className="mx-2">
                   Home
                 </Button>
               </Link>
-              <Link to="/store">
-                <Button variant="outline-light" size="sm" className="mx-2">
-                  Store
-                </Button>
-              </Link>
+              {login && (
+                <Link to="/store">
+                  <Button variant="outline-light" size="sm" className="mx-2">
+                    Store
+                  </Button>
+                </Link>
+              )}
               <Link to="/about">
                 <Button variant="outline-light" size="sm" className="mx-2">
                   About
@@ -34,12 +39,17 @@ export default function Header() {
                   Contact US
                 </Button>
               </Link>
+                <Link to="/auth">
+                  <Button variant="outline-light" size="sm" className="mx-2">
+                    Login
+                  </Button>
+                </Link>
             </Nav>
           </Navbar.Collapse>
-        
-        <Cart/>
-      </Container>
-    </Navbar>
+
+          <Cart />
+        </Container>
+      </Navbar>
     </>
-  )
+  );
 }

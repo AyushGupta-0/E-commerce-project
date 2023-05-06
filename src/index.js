@@ -8,13 +8,15 @@ import reportWebVitals from "./reportWebVitals.js";
  */
 import "../node_modules/react-bootstrap/dist/react-bootstrap";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import  { AuthContextProvider } from "./store/auth-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <AuthContextProvider>
+    <React.StrictMode>
       <App />
-    
-  </React.StrictMode>
+    </React.StrictMode>
+  </AuthContextProvider>
 );
 
 reportWebVitals();
