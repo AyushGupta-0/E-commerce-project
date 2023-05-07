@@ -1,44 +1,61 @@
-import React,{useContext} from 'react';
-import {
-  createBrowserRouter,RouterProvider,
-  redirect,
-} from 'react-router-dom';
+import React,{useContext,Suspense,lazy} from "react";
+import { Redirect, Route,Switch } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
-import About from './Pages/About';
-import ContactUs from './Pages/ContactUs';
+import About from "./Pages/About";
+// import Store from "./Pages/Store";
+import ContactUs from "./Pages/ContactUs";
+import ProductDetails from "./Components/Products/ProductDetails";
+import AuthContext from "./store/auth-context";
+
+
+
 import Home from './Pages/Home';
-import Store from './Pages/Store';
-import ProductDetails from './components/Products/ProductDetails';
-import AuthContext from './store/auth-context';
-import AuthPage from './Pages/AuthPage';
-
+import AuthPage from "./Pages/AuthPage";
+const Store=lazy(()=>import('./Pages/Store'))
 
 
 function App() {
   const authctx=useContext(AuthContext);
-  const login =authctx.isLoggenIn;
+  const login=authctx.isLoggenIn;
   return (
-    <>
-    <RouterProvider router={router} />;
+    <div>
    
-      </>
+      <main>
+        <Switch>
+      <Route exact path='/'>
+        <Home/>
+      </Route>
+      <Route exact path='/about'>
+        <About/>
+      </Route>
+      <Route exact path='/store'>
+        <Suspense fallback={<h1 >Loading...</h1>}>
+        {login && 
+        <Store/>}
+        {!login && 
+        <Redirect to='/auth'/> }
+
+        </Suspense>
+        
+      </Route>
+      <Route exact path='/contact'>
+        <ContactUs />
+      </Route>
+      <Route exact path='/auth'>
+        <AuthPage/>
+        
+      </Route>
+      <Route path='/productdetails/:id'>
+      <ProductDetails />
+    </Route>
+
+      </Switch>
+      </main>
+      
+    </div>
   );
 }
-
-const router = createBrowserRouter([
-  { path: '/about', element: <About/> },
-  { path: '/', element: <Home/> },
-  { path: '/contact', element: <ContactUs/> },
-  { path: '/store' , element:   <Store/> },
-  { path: '/productdetails/:id' , element: <ProductDetails/>},
-  { path: '/auth' , element : <AuthPage/>}
-  
-  
-]);
-
-
-
 
 export default App;

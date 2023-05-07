@@ -1,20 +1,23 @@
-import React from "react";
-import "./Home.css";
+import React from 'react'
+
+import MainHeader from '../Components/Header/MainHeader'
+import './Home.css'
+
+import CartState from '../store/CartState'
 
 
-import MainHeader from "../components/Header/MainHeader";
-
-import CartState from "../store/CartState";
-//import pic from '../asset/pic.jpg'
-//import Figure from 'react-bootstrap/Figure';
 
 export default function Home() {
-  return (
-    <React.Fragment>
-      <CartState>
-        <MainHeader />
-      </CartState>
-      <header>
+
+  return (<>
+
+    <CartState>
+
+<MainHeader/>
+
+
+</CartState>
+<header>
         <h1>The Generics</h1>
         <button className="latest-album">Get Our Latest Albums</button>
         <button className="play-btn">►</button>
@@ -77,6 +80,6 @@ export default function Home() {
             </ul> */}
         </div>
       </footer>
-    </React.Fragment>
+      </>
   );
 }

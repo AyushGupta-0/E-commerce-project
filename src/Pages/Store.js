@@ -1,8 +1,7 @@
 import React from 'react'
-import Header from '../components/Header/Header';
-import Productslist from '../components/Products/ProductsList';
+import Header from '../Components/Header/Header'
+import Productslist from '../Components/Products/Productslist'
 import CartState from '../store/CartState'
-
 
 export default function Store() {
   return (
